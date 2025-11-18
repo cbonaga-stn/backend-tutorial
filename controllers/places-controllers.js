@@ -1,7 +1,7 @@
 const { v7: uuid } = require("uuid");
 const { validationResult } = require("express-validator");
 
-const fs = require('fs');
+const fs = require('fs');   // File system module for deleting files
 
 const getCoordsForAddress = require("../util/geocode");
 const Place = require("../models/place");
@@ -152,7 +152,7 @@ const updatePlace = async (req, res, next) => {
   res.status(200).json({ place: place.toObject({ getters: true }) });
 };
 
-const deletePlace = async (req, res, next) => {
+const deletePlace = async (req, res, next) => {   // Delete place by ID
   const placeId = req.params.pid;
 
   let place;
@@ -168,7 +168,7 @@ const deletePlace = async (req, res, next) => {
     const imagePath = place.image;   // Get image path before deleting place
 
   try {
-    await place.deleteOne();
+    await place.deleteOne();   // Delete place from database
   } catch (err) {
     const error = new HttpError(
       "Something went wrong, could not delete place.",
@@ -176,9 +176,9 @@ const deletePlace = async (req, res, next) => {
     );
     return next(error);
   }
-    fs.unlink(imagePath, err => {
+    fs.unlink(imagePath, err => { 
     if (err) {
-      console.log('Image cleanup failed:', err);
+      console.log('Image cleanup failed:', err);   // Log error if image deletion fails
     }
   });
 

@@ -9,9 +9,9 @@ const fileUpload = require('../middleware/file-upload');  // Import file upload 
 
 router.get("/", usersController.getUsers);
 
-router.post(
+router.post(   // Handle user signup with image upload
   "/signup",
-  fileUpload.single('image'), // handle image upload before validators so req.body is populated
+  fileUpload.single('image'), 
   [
     check("name").not().isEmpty(),
     check("email")

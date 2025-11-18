@@ -18,7 +18,7 @@ app.use('/uploads/images', express.static(path.join('uploads', 'images'))); // S
 
 app.use((error, req, res, next) => {   // Error handling middleware for file upload errors
   if (req.file) {
-    fs.unlink(req.file.path, err => {
+    fs.unlink(req.file.path, err => {   // Delete the uploaded file if an error occurred
       console.log(err);
     });
   }
