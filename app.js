@@ -55,7 +55,7 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect(process.env.DB_URL)
+  .connect(process.env.DB_URL=mongodb+srv://User1:YourRealPassword@cluster0.xmongjr.mongodb.net/places?retryWrites=true&w=majority)
   .then(() => {
     app.listen(5005);
   })
