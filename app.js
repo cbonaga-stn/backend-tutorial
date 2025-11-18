@@ -57,8 +57,15 @@ app.use((error, req, res, next) => {
 mongoose
   .connect(process.env.DB_URL)
   .then(() => {
-    app.listen(5005);
+    console.log('MongoDB connected');
+    app.listen(5005, () => {
+      console.log('Server listening on port 5005');
+    });
   })
   .catch((err) => {
-    console.log(err);
+    console.error('MongoDB connection failed:', err && err.message ? err.message : err);
+    console.warn('Starting server without MongoDB connection (development fallback).');
+    app.listen(5005, () => {
+      console.log('Server listening on port 5005 (no DB)');
+    });
   });
