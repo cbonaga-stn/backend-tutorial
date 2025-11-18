@@ -55,7 +55,7 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect(process.env.DB_URL)
+  .connect(process.env.DB_URL)   // Use environment variable for DB connection
   .then(() => {
     console.log('MongoDB connected');
     app.listen(5005, () => {
