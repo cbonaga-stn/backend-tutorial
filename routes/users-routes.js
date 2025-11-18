@@ -6,12 +6,12 @@ const usersController = require("../controllers/users-controllers");
 const router = express.Router();
 
 const fileUpload = require('../middleware/file-upload');  // Import file upload middleware
-router.post('/signup', fileUpload.single('image'), usersController.signup);   // Handle image upload during signup
 
 router.get("/", usersController.getUsers);
 
 router.post(
   "/signup",
+  fileUpload.single('image'), // handle image upload before validators so req.body is populated
   [
     check("name").not().isEmpty(),
     check("email")
